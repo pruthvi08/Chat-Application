@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chat Applcation</h1>
+    <input type="text"  id="msg">
+    <button id="btn">click</button>
+    <ul id="list"></ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io()
+        let btn = document.getElementById('btn')
+        let msg = document.getElementById('msg')
+        let list = document.getElementById('list')
+
+
+     btn.onclick = function exec(data){
+            socket.emit("client_send",{
+                msg:msg.value
+            })
+     }
+
+    socket.on('server_send',(data)=>{
+       
+        let newlist = document.createElement('li')
+        newlist.innerText = data.msg
+        list.appendChild(newlist)
+
+            
+           
+        })
+
+       
+
+
+
+    </script>
+</body>
+</html>
